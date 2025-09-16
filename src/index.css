@@ -1,0 +1,143 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root{
+  background-color: #F5F7FB;
+}
+main{
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.intro{
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+svg:first-of-type{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+svg:last-of-type{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.intro >h1{
+  font-family: "Karla";
+  font-weight: 700;
+  font-size: 1.95rem;
+  text-align: center;
+  color: #293264;
+  margin-bottom: 7px ;
+}
+.intro >p{
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: center;
+  color: #293264;
+  margin-bottom: 29px ;
+}
+.intro >button{
+  width: 193px;
+  height: 52px;
+  border: none;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #4D5B9E;
+  color: white;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quizz{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.question{
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-block: 14px;
+  gap: 14px;
+  border-bottom: 0.79px solid #DBDEF0;
+}
+.question>h1{
+  font-family: "Karla";
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #293264;
+}
+.answers{
+  display: flex;
+  gap: 13px;
+}
+.answers>button{
+  border-radius: 7.94px;
+  border: 0.77px solid #4D5B9E;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #293264;
+  overflow-wrap: break-word;
+  padding: 5px;
+}
+
+.answers>button.answer{
+  background-color: #D6DBF5;
+  border: none;
+}
+.answers>button.right-answer{
+  background-color: #94D7A2;
+  border: none;
+}
+.answers>button.wrong-answer{
+  background-color:#F8BCBC;
+  border: none;
+  opacity: 0.5;
+}
+
+.btn{
+  width: 120px;
+  height: 35px;
+  border-radius: 10px;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  font-family: "Inter";
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.footer span{
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-right: 8px;
+  color: #293264;
+}
+
+
+
+
