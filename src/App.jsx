@@ -8,7 +8,7 @@ function App() {
   const [answers,setAnswers]=useState([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""}])
   const [checkAnswers,setCheckAnswers]=useState(false)
   const [playAgain,setPlayAgain]=useState(false)
-  console.log(answers)
+  
   useEffect(()=>{
     fetch("https://opentdb.com/api.php?amount=5&encode=url3986")
       .then(res=>res.json())
