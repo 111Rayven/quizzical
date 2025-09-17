@@ -7,7 +7,8 @@ function App() {
   const [quizz, setQuizz]=useState([])
   const [answers,setAnswers]=useState([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""}])
   const [checkAnswers,setCheckAnswers]=useState(false)
-
+  const [playAgain,setPlayAgain]=useState(false)
+  console.log(answers)
   useEffect(()=>{
     fetch("https://opentdb.com/api.php?amount=5&encode=url3986")
       .then(res=>res.json())
@@ -16,7 +17,7 @@ function App() {
         question.incorrect_answers.splice(randomIndex, 0,question.correct_answer)
         return question
       })))
-  },[quizz])
+  },[playAgain])
   
   function handleClick(){
     const {value,name}=event.target
@@ -59,7 +60,8 @@ function App() {
           
           <div className='footer'>
             {checkAnswers &&  <span>{`You scored ${correctAnswers()}/5 correct answers`}</span>}
-            <button className='btn' onClick={checkAnswers ?()=>{ setQuizz([]); setCheckAnswers(prev=>!prev);}:()=>setCheckAnswers(prev=>!prev)}>
+            <button className='btn' onClick={checkAnswers ?()=>{ setPlayAgain(prev=>!prev); setCheckAnswers (prev=>!prev); setAnswers([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""}, {'questionNbr':3,ans:""},{'questionNbr':4,ans:""}]);}
+              :()=>setCheckAnswers(prev=>!prev)}>
               {checkAnswers ?"Play Again":"Check answers"}
             </button> 
           </div> 
