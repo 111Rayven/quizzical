@@ -1,6 +1,8 @@
 import { useState , useEffect} from 'react'
 import {clsx} from 'clsx'
 import { nanoid } from 'nanoid'
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 
 function App() {
   const [startQuizz, setStartQuizz] = useState(false)
@@ -11,6 +13,7 @@ function App() {
   const [answers,setAnswers]=useState([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""},{'questionNbr':5,ans:""},{'questionNbr':6,ans:""},{'questionNbr':7,ans:""},{'questionNbr':8,ans:""},{'questionNbr':9,ans:""},{'questionNbr':10,ans:""},{'questionNbr':11,ans:""},{'questionNbr':12,ans:""},{'questionNbr':13,ans:""},{'questionNbr':14,ans:""},{'questionNbr':15,ans:""},{'questionNbr':16,ans:""},{'questionNbr':17,ans:""},{'questionNbr':18,ans:""},{'questionNbr':19,ans:""}])
   const [checkAnswers,setCheckAnswers]=useState(false)
   const [playAgain,setPlayAgain]=useState(false)
+  const { width, height } = useWindowSize()
   useEffect(()=>{
     fetch("https://opentdb.com/api_category.php")
       .then(res=>res.json())
@@ -71,13 +74,14 @@ function App() {
               </button>)}
               </div>
             </section>)} 
-            <div className='footer'>
-              {checkAnswers &&  <span>{`You scored ${correctAnswers()}/5 correct answers`}</span>}
+            <section className='footer'>
+              {checkAnswers &&  <span>{`You scored ${correctAnswers()}/${quizzTemplate.questionNbr} correct answers`}</span>}
               <button className='btn' onClick={checkAnswers ?()=>{ setPlayAgain(prev=>!prev); setCheckAnswers(prev=>!prev); setAnswers([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""},{'questionNbr':5,ans:""},{'questionNbr':6,ans:""},{'questionNbr':7,ans:""},{'questionNbr':8,ans:""},{'questionNbr':9,ans:""},{'questionNbr':10,ans:""},{'questionNbr':11,ans:""},{'questionNbr':12,ans:""},{'questionNbr':13,ans:""},{'questionNbr':14,ans:""},{'questionNbr':15,ans:""},{'questionNbr':16,ans:""},{'questionNbr':17,ans:""},{'questionNbr':18,ans:""},{'questionNbr':19,ans:""}]);}
                 :()=>setCheckAnswers(prev=>!prev)}>
                 {checkAnswers ?"Play Again":"Check answers"}
               </button> 
-            </div> 
+            </section>
+            {correctAnswers()===quizzTemplate.questionNbr && <Confetti width={width}height={height}/>} 
           </main>
         :
           /* choosing quizz template page  */
