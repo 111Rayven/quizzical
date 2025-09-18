@@ -5,15 +5,16 @@
 }
 #root{
   background-color: #F5F7FB;
-}
-main{
   width: 100vw;
-  height: 100vh;
   position: relative;
 }
+main{
+  width: 70vw;
+  margin-inline: auto;
+  padding-block: 50px;
+}
 .intro{
-  width: 100%;
-  height:100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +30,7 @@ svg:last-of-type{
   bottom: 0;
   left: 0;
 }
+
 .intro >h1{
   font-family: "Karla";
   font-weight: 700;
@@ -59,17 +61,92 @@ svg:last-of-type{
   cursor: pointer;
 }
 
-.quizz{
-  width: 100%;
-  height: 100%;
+.create-quizz{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.create-quizz h1{
+  text-align: center;
+  color: #293264;
+}
+.categories{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-block: 20px;
+  border-bottom: 0.79px solid #DBDEF0;
+}
+.create-quizz button{
+  border-radius: 7.94px;
+  border: 0.77px solid #4D5B9E;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #293264;
+  padding: 5px;
+  background-color: #F5F7FB;
+}
+.categories button.chosen{
+  background-color: #D6DBF5;
+  border: none;
+}
 
+.amount{
+  display: flex;
+  gap: 20px;
+  padding-block: 20px;
+  border-bottom: 0.79px solid #DBDEF0;
+}
+.amount button{
+  width: 100px;
+}
+.amount button.chosen{
+  background-color: #D6DBF5;
+  border: none;
+}
+.difficulty{
+  display: flex;
+  gap: 20px;
+  padding-block: 20px;
+  border-bottom: 0.79px solid #DBDEF0;
+}
+.difficulty button.chosen{
+  background-color: #D6DBF5;
+  border: none;
+}
+.question-type{
+  display: flex;
+  gap: 20px;
+  padding-block: 20px;
+  border-bottom: 0.79px solid #DBDEF0;
+}
+.question-type button.chosen{
+  background-color: #D6DBF5;
+  border: none;
+}
+
+.create-quizz .btn{
+  width: 120px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.quizz{
+  min-height: 100vh;
 }
 .question{
-  width: 800px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -96,8 +173,8 @@ svg:last-of-type{
   font-weight: 500;
   font-size: 0.8rem;
   color: #293264;
-  overflow-wrap: break-word;
   padding: 5px;
+  background-color: #F5F7FB;
 }
 
 .answers>button.answer{
@@ -114,20 +191,22 @@ svg:last-of-type{
   opacity: 0.5;
 }
 
-.btn{
+.footer{
+  text-align: center;
+}
+.footer .btn{
   width: 120px;
   height: 35px;
   border-radius: 10px;
-  margin-top: 30px;
   border: none;
   cursor: pointer;
   background-color: #4D5B9E;
   color: #F5F7FB;
   font-family: "Inter";
   font-weight: 600;
-  font-style: Semi Bold;
   font-size: 0.7rem;
   text-align: center;
+  margin-top: 20px;
 }
 .footer span{
   font-family: "Inter";
