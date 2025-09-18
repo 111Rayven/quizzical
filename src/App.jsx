@@ -27,7 +27,7 @@ function App() {
       })))
     } 
   },[createQuizz,playAgain])
-  console.log(`https://opentdb.com/api.php?amount=${quizzTemplate.questionNbr}${typeof quizzTemplate.category==='object'? `&category=${quizzTemplate.category.id}`:""}${quizzTemplate.difficulty?`&difficulty=${quizzTemplate.difficulty}`:""}${quizzTemplate.questionType?`&type=${quizzTemplate.questionType}`:""}&encode=url3986`)
+  
   function handleClick(){
     const {value,name}=event.target
     setAnswers(prev=>prev.map(answer=>answer.questionNbr===Number(name) ?{questionNbr:answer.questionNbr , ans:value}:answer))
