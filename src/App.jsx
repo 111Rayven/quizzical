@@ -1,10 +1,13 @@
-import { useState , useEffect} from 'react'
+import { useState , useEffect , useRef} from 'react'
 import {clsx} from 'clsx'
 import { nanoid } from 'nanoid'
 import { useWindowSize } from 'react-use'
 import Confetti from 'react-confetti'
 
 function App() {
+  const [timeLeft, setTimeLeft] = useState(240)
+  const [isRunning,setIsRunning]=useState(false)
+  const buttonRef=useRef(null)
   const [startQuizz, setStartQuizz] = useState(false)
   const [categories,setCategories]=useState([])
   const [quizzTemplate,setQuizzTemplate]=useState({category:"any category",questionNbr:5,difficulty:"",questionType:""})
@@ -14,6 +17,7 @@ function App() {
   const [checkAnswers,setCheckAnswers]=useState(false)
   const [playAgain,setPlayAgain]=useState(false)
   const { width, height } = useWindowSize()
+
   useEffect(()=>{
     fetch("https://opentdb.com/api_category.php")
       .then(res=>res.json())
@@ -30,6 +34,29 @@ function App() {
       })))
     } 
   },[createQuizz,playAgain])
+
+  useEffect(() => {
+    if (timeLeft > 0 && isRunning) {
+      const timerId = setInterval(() => {
+        setTimeLeft(prevTime => prevTime - 1);
+      }, 1000);
+      return () => clearInterval(timerId); 
+    } else if (timeLeft === 0) {
+      if (buttonRef.current && buttonRef.current.value==="Check answers") {
+        buttonRef.current.click();
+      }
+    }
+  }, [timeLeft, isRunning]);
+
+  function formatTime(){
+    let minute=Math.floor(timeLeft/60)
+    let seconds=Math.floor(timeLeft%60)
+
+    minute=String(minute).padStart(2,"0")
+    seconds=String(seconds).padStart(2,"0")
+
+    return `${minute}:${seconds}`
+  }
   
   function handleClick(){
     const {value,name}=event.target
@@ -56,11 +83,12 @@ function App() {
         <main className='intro'>
           <h1>Quizzical</h1>
           <p>Some description if needed</p>
-          <button onClick={()=>setStartQuizz(prev=>!prev)}>Start quiz</button>
+          <button onClick={()=>setStartQuizz(true)}>Start quiz</button>
         </main>
       : createQuizz ? 
           /* quizz page */
           <main className='quizz'>
+            <h1>{formatTime()}</h1>
             {quizz.map((question,index)=>
             <section key={index} className='question'>
               <h1>{ decodeURIComponent(question.question)}</h1>
@@ -76,8 +104,8 @@ function App() {
             </section>)} 
             <section className='footer'>
               {checkAnswers &&  <span>{`You scored ${correctAnswers()}/${quizzTemplate.questionNbr} correct answers`}</span>}
-              <button className='btn' onClick={checkAnswers ?()=>{ setPlayAgain(prev=>!prev); setCheckAnswers(prev=>!prev); setAnswers([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""},{'questionNbr':5,ans:""},{'questionNbr':6,ans:""},{'questionNbr':7,ans:""},{'questionNbr':8,ans:""},{'questionNbr':9,ans:""},{'questionNbr':10,ans:""},{'questionNbr':11,ans:""},{'questionNbr':12,ans:""},{'questionNbr':13,ans:""},{'questionNbr':14,ans:""},{'questionNbr':15,ans:""},{'questionNbr':16,ans:""},{'questionNbr':17,ans:""},{'questionNbr':18,ans:""},{'questionNbr':19,ans:""}]);}
-                :()=>setCheckAnswers(prev=>!prev)}>
+              <button ref={buttonRef} className='btn' value={checkAnswers ?"Play Again":"Check answers"} onClick={checkAnswers ?()=>{ setPlayAgain(prev=>!prev); setCheckAnswers(prev=>!prev); setAnswers([{'questionNbr':0,ans:""},{'questionNbr':1,ans:""},{'questionNbr':2,ans:""},{'questionNbr':3,ans:""},{'questionNbr':4,ans:""},{'questionNbr':5,ans:""},{'questionNbr':6,ans:""},{'questionNbr':7,ans:""},{'questionNbr':8,ans:""},{'questionNbr':9,ans:""},{'questionNbr':10,ans:""},{'questionNbr':11,ans:""},{'questionNbr':12,ans:""},{'questionNbr':13,ans:""},{'questionNbr':14,ans:""},{'questionNbr':15,ans:""},{'questionNbr':16,ans:""},{'questionNbr':17,ans:""},{'questionNbr':18,ans:""},{'questionNbr':19,ans:""}]); setTimeLeft(240); setIsRunning(true);}
+                :()=>{setCheckAnswers(prev=>!prev); setIsRunning(false)}}>
                 {checkAnswers ?"Play Again":"Check answers"}
               </button> 
             </section>
@@ -109,7 +137,7 @@ function App() {
               <button onClick={()=>setQuizzTemplate(prev=>({...prev,questionType:'boolean'}))} className={clsx(quizzTemplate.questionType==="boolean"&&'chosen')}>True/false</button>
               <button onClick={()=>setQuizzTemplate(prev=>({...prev,questionType:'multiple'}))} className={clsx(quizzTemplate.questionType==="multiple"&&'chosen')}>Multiple choice</button>
             </section>
-            <button className='btn' onClick={()=>setCreateQuizz(true)}>Create Quizz</button>
+            <button className='btn' onClick={()=>{setCreateQuizz(true); setIsRunning(true);}}>Create Quizz</button>
           </main>
         }   
     </>

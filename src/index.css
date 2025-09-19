@@ -11,7 +11,7 @@
 main{
   width: 70vw;
   margin-inline: auto;
-  padding-block: 50px;
+  padding-block: 20px;
 }
 .intro{
   height: 100vh;
@@ -70,12 +70,13 @@ svg:last-of-type{
 }
 .create-quizz h1{
   text-align: center;
-  color: #293264;
+  color: #4D5B9E;
 }
 .categories{
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  column-gap: 10px;
   padding-block: 20px;
   border-bottom: 0.79px solid #DBDEF0;
 }
@@ -88,6 +89,10 @@ svg:last-of-type{
   color: #293264;
   padding: 5px;
   background-color: #F5F7FB;
+  margin-top: 5px;
+}
+.create-quizz .btn{
+  margin-top :20px;
 }
 .categories button.chosen{
   background-color: #D6DBF5;
@@ -145,22 +150,29 @@ svg:last-of-type{
 .quizz{
   min-height: 100vh;
 }
+.quizz h1{
+  text-align: center;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 2.5em;
+  color: #293264;
+}
 .question{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding-block: 14px;
+  padding-bottom: 14px;
   gap: 14px;
   border-bottom: 0.79px solid #DBDEF0;
 }
 .question>h1{
+  text-align: start;
   font-family: "Karla";
   font-weight: 700;
   font-size: 1.1rem;
-  line-height: 100%;
-  letter-spacing: 0%;
   color: #293264;
+  margin-top: 5px;
 }
 .answers{
   display: flex;
