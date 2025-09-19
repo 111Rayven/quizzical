@@ -109,7 +109,7 @@ function App() {
                 {checkAnswers ?"Play Again":"Check answers"}
               </button> 
             </section>
-            {correctAnswers()===quizzTemplate.questionNbr && <Confetti width={width}height={height}/>} 
+            {correctAnswers()===quizzTemplate.questionNbr && checkAnswers && <Confetti width={width}height={height}/>} 
           </main>
         :
           /* choosing quizz template page  */
