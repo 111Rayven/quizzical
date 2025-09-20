@@ -30,7 +30,6 @@ function App() {
       .then(data=>setQuizz(data.results.map(question=>
       { const randomIndex = Math.floor(Math.random() * (question.incorrect_answers.length + 1));
         question.incorrect_answers.splice(randomIndex, 0,question.correct_answer);
-        console.log(randomIndex);
         return question
       })))
     } 
