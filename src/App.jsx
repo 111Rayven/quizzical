@@ -28,8 +28,9 @@ function App() {
       fetch(`https://opentdb.com/api.php?amount=${quizzTemplate.questionNbr}${typeof quizzTemplate.category==='object'? `&category=${quizzTemplate.category.id}`:""}${quizzTemplate.difficulty?`&difficulty=${quizzTemplate.difficulty}`:""}${quizzTemplate.questionType?`&type=${quizzTemplate.questionType}`:""}&encode=url3986`)
       .then(res=>res.json())
       .then(data=>setQuizz(data.results.map(question=>
-      { const randomIndex = Math.floor(Math.random() * question.incorrect_answers.length + 1);
-        question.incorrect_answers.splice(randomIndex, 0,question.correct_answer)
+      { const randomIndex = Math.floor(Math.random() * (question.incorrect_answers.length + 1));
+        question.incorrect_answers.splice(randomIndex, 0,question.correct_answer);
+        console.log(randomIndex);
         return question
       })))
     } 
